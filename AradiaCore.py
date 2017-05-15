@@ -94,19 +94,21 @@ class AradiaCore(discord.Client):
         mem = float(mem)/1048576
         cpu = str(psutil.cpu_percent(interval=None)) + '%'
         toreturn += ':floppy_disk: | Memory usage: {}MB\n'.format(str(mem))
-        toreturn += ':diamond_shape_with_a_dot_inside: | CPU usage: ' + cpu +'\n'
+        toreturn += ':diamond_shape_with_a_dot_inside: | CPU usage: ' + cpu + '\n'
         return toreturn
 
-    async def say(self, message, *, file=None, embed=None, tts=None, expire=0, dest=None):
+    async def say(self, message=None, *, file=None, embed=None, tts=False, expire=0, dest=None):
         """
         Sends a message, tries to use the global context first but does have a `dest` fall back
         """
         if not dest:
             dest = self.context.channel
 
-        message = message if message else ''
-
-        msg = await dest.send(message, file=None or discord.File(file), delete_after=None or expire)
+        msg = await dest.send(message,
+                              file=None or discord.File(file),
+                              delete_after=None or expire,
+                              embed=embed,
+                              tts=tts)
 
         return msg
 
