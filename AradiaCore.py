@@ -166,7 +166,7 @@ class AradiaCore(discord.Client):
                 # PM user, if we cant, just ignore.
                 await msg.author.send('I cannot send a message in {}'.format(msg.guild.name))
             except discord.errors.Forbidden:
-                print('Couldnt send forbidden message ;-; ')
+                print('Couldn\'t send forbidden message ;-; ')
 
         sent = None
         if res:
